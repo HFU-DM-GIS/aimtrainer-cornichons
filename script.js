@@ -84,15 +84,15 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(countdownInterval);
         isGameRunning = false;
         startButton.disabled = false;
-        if (score < 20)
+        if (score < 500)
         alert('Only ' + score + '!? You SUCK!');
         else
-        if(score < 40)
+        if(score < 1000)
         alert(score + '? I mean it`s alright')
         else
-        if(score < 60)
+        if(score < 2000)
         alert('You`ve done well with ' + points + ' points')
-        else(score > 60)
+        else(score > 4000)
         alert(points + '! OMG MOM GET THE CAMERA')
     }
 });
