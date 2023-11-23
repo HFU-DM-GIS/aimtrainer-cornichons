@@ -1,14 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
     const target = document.getElementById('target');
     const scoreElement = document.getElementById('score');
+    const timerElement = document.getElementById('timer');
+    const startButton = document.getElementById('start-button');
     let score = 0;
+    let time = 60;
+    let isGameRunning = false;
+    let countdownInterval;
 
     target.addEventListener('click', hitTarget);
+    startButton.addEventListener('click', startGame);
 
     function hitTarget() {
-        score++;
-        updateScore();
-        moveTarget();
+        if (isGameRunning) {
+            score++;
+            updateScore();
+            moveTarget();
+        }
     }
 
     function updateScore() {
@@ -26,5 +34,31 @@ document.addEventListener('DOMContentLoaded', function () {
         target.style.top = randomY + 'px';
     }
 
-    moveTarget(); // Initial target placement
+    function startGame() {
+        if (!isGameRunning) {
+            score = 0;
+            time = 60;
+            updateScore();
+            startButton.disabled = true;
+            isGameRunning = true;
+            countdownInterval = setInterval(updateTimer, 1000);
+            moveTarget();
+        }
+    }
+
+    function updateTimer() {
+        time--;
+        timerElement.textContent = 'Time: ' + time;
+
+        if (time <= 0) {
+            endGame();
+        }
+    }
+
+    function endGame() {
+        clearInterval(countdownInterval);
+        isGameRunning = false;
+        startButton.disabled = false;
+        alert('Game Over! Your score is: ' + score);
+    }
 });
