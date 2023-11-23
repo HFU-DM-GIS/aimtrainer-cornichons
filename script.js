@@ -59,6 +59,15 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(countdownInterval);
         isGameRunning = false;
         startButton.disabled = false;
-        alert('Game Over! Your score is: ' + score);
+        if (score < 20)
+        alert('Only ' + score + '!? You SUCK!');
+        else
+        if(score < 40)
+        alert(score + '? I mean it`s alright')
+        else
+        if(score < 60)
+        alert('You`ve done well with ' + points + ' points')
+        else(score > 60)
+        alert(points + '! OMG MOM GET THE CAMERA')
     }
 });
