@@ -17,12 +17,12 @@ body {
 
 .target {
     position: absolute;
-    width: 50px;
+    width: 100px;
     height: 50px;
     background-image: url('PNG/CornichonAIM.png');
     background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 100%;
+    background-size: 100% 100%; /* Hinzugefügt */
+    border-radius: 50%;
     cursor: pointer;
 }
 
