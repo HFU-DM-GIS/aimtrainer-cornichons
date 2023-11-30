@@ -4,8 +4,8 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-color: #f0f0f0;
-}
+    background-image: url('PNG/BesseresHolzbrett.jpg'); /* Hinzugefügt */
+    background-size: cover;
 
 .game-container {
     position: relative;
