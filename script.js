@@ -12,6 +12,18 @@ document.addEventListener('DOMContentLoaded', function () {
     target.addEventListener('click', hitTarget);
     startButton.addEventListener('click', startGame);
 
+    function startGame() {
+        if (!isGameRunning) {
+            score = 0;
+            time = 60;
+            updateScore();
+            startButton.disabled = true;
+            isGameRunning = true;
+            countdownInterval = setInterval(updateTimer, 1000);
+            rotateAndMoveTarget();
+        }
+    }
+
     function hitTarget() {
         if (isGameRunning) {
             const clickTime = new Date().getTime();
@@ -29,6 +41,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             score += points;
             updateScore();
+            updateTable(attemptNumber, reactionTime); // Add this line
+            attemptNumber++; // Increment the attempt number
             rotateAndMoveTarget();
         }
     }
@@ -59,17 +73,6 @@ document.addEventListener('DOMContentLoaded', function () {
         targetClickTime = new Date().getTime(); // Setze die Zeit, wenn das Ziel bewegt wurde
     }
 
-    function startGame() {
-        if (!isGameRunning) {
-            score = 0;
-            time = 60;
-            updateScore();
-            startButton.disabled = true;
-            isGameRunning = true;
-            countdownInterval = setInterval(updateTimer, 1000);
-            rotateAndMoveTarget();
-        }
-    }
 
     function updateTimer() {
         time--;
@@ -98,23 +101,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     let attemptNumber = 1; // Track the attempt number
 
-    function hitTarget() {
-        if (isGameRunning) {
-            const clickTime = new Date().getTime();
-            const reactionTime = (clickTime - targetClickTime) / 1000; // in seconds
-
-            let points = 0;
-
-            // ... (your existing code)
-
-            score += points;
-            updateScore();
-            updateTable(attemptNumber, reactionTime); // Add this line
-            attemptNumber++; // Increment the attempt number
-            rotateAndMoveTarget();
-        }
-    }
-
     function updateTable(attempt, reaction) {
         // Get the table body
         const tableBody = document.getElementById('table-body');
@@ -137,5 +123,3 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // ... (your existing code)
 });
-
-
