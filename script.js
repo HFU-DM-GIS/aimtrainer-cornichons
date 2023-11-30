@@ -95,4 +95,47 @@ document.addEventListener('DOMContentLoaded', function () {
         else(score > 4000)
         alert(points + '! OMG MOM GET THE CAMERA')
     }
+
+    let attemptNumber = 1; // Track the attempt number
+
+    function hitTarget() {
+        if (isGameRunning) {
+            const clickTime = new Date().getTime();
+            const reactionTime = (clickTime - targetClickTime) / 1000; // in seconds
+
+            let points = 0;
+
+            // ... (your existing code)
+
+            score += points;
+            updateScore();
+            updateTable(attemptNumber, reactionTime); // Add this line
+            attemptNumber++; // Increment the attempt number
+            rotateAndMoveTarget();
+        }
+    }
+
+    function updateTable(attempt, reaction) {
+        // Get the table body
+        const tableBody = document.getElementById('table-body');
+
+        // Create a new row
+        const newRow = document.createElement('tr');
+
+        // Create and set values for the cells
+        const attemptCell = document.createElement('td');
+        attemptCell.textContent = attempt;
+        newRow.appendChild(attemptCell);
+
+        const reactionCell = document.createElement('td');
+        reactionCell.textContent = reaction.toFixed(2); // Display reaction time with two decimal places
+        newRow.appendChild(reactionCell);
+
+        // Append the new row to the table body
+        tableBody.appendChild(newRow);
+    }
+
+    // ... (your existing code)
 });
+
+
