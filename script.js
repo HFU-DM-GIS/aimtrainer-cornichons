@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             score += points;
             updateScore();
-            updateTable(attemptNumber, reactionTime); // Add this line
+            updateTable(attemptNumber, reactionTime); 
             attemptNumber++; // Increment the attempt number
             rotateAndMoveTarget();
         }
