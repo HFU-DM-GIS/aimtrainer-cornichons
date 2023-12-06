@@ -4,7 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url('PNG/BesseresHolzbrett.jpg'); /* Hinzugefügt */
+    background-image: url('PNG/BesseresHolzbrett.jpg'); 
     background-size: cover;
 
 .game-container {
@@ -21,9 +21,27 @@ body {
     height: 50px;
     background-image: url('PNG/CornichonAIM.png');
     background-repeat: no-repeat;
-    background-size: 100% 100%; /* Hinzugefügt */
+    background-size: 100% 100%; 
     border-radius: 50%;
     cursor: pointer;
+}
+
+#reaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px; 
+}
+
+#reaction-table th {
+    padding: 8px;
+    text-align: center; 
+    border: 1px solid #000000; 
+}
+
+#reaction-table td {
+    padding: 8px;
+    text-align: center; 
+    border: 1px solid #000000; 
 }
 
 .score {

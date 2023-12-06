@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const scoreElement = document.getElementById('score');
     const timerElement = document.getElementById('timer');
     const startButton = document.getElementById('start-button');
+    let attemptNumber = 1;
     let score = 0;
     let time = 60;
     let isGameRunning = false;
@@ -99,9 +100,8 @@ document.addEventListener('DOMContentLoaded', function () {
         alert(points + '! OMG MOM GET THE CAMERA')
     }
 
-    let attemptNumber = 1; // Track the attempt number
-
     function updateTable(attempt, reaction) {
+
         // Get the table body
         const tableBody = document.getElementById('table-body');
 
@@ -121,5 +121,4 @@ document.addEventListener('DOMContentLoaded', function () {
         tableBody.appendChild(newRow);
     }
 
-    // ... (your existing code)
 });
