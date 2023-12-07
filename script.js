@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const scoreElement = document.getElementById('score');
     const timerElement = document.getElementById('timer');
     const startButton = document.getElementById('start-button');
+    const resetButton = document.getElementById('reset-button');
     let attemptNumber = 1;
     let score = 0;
     let time = 60;
@@ -12,6 +13,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
     target.addEventListener('click', hitTarget);
     startButton.addEventListener('click', startGame);
+    resetButton.addEventListener('click', resetGame);
+
+    function resetGame() {
+        clearInterval(countdownInterval);
+        isGameRunning = false;
+        startButton.disabled = false;
+        score = 0;
+        time = 60;
+        attemptNumber = 1;
+        updateScore();
+        timerElement.textContent = 'Time: ' + time;
+
+        // Lösche den Inhalt der Tabelle
+        const tableBody = document.getElementById('table-body');
+        tableBody.innerHTML = '';
+
+        // Setze den Ziel-Div zurück
+        target.style.transform = 'rotate(0deg) scale(1)';
+        target.style.left = '0';
+        target.style.top = '0';
+
+    }
+
 
     function startGame() {
         if (!isGameRunning) {

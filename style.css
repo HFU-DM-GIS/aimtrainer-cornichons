@@ -74,3 +74,26 @@ body {
     cursor: pointer;
 }
 }
+
+.start-button, .reset-button {
+    font-family: inherit;
+    position: absolute;
+    bottom: 20px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+}
+
+.start-button {
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: #fff;
+}
+
+.reset-button {
+    left: calc(50% + 100px); /* 100px Abstand zum Start-Button anpassen */
+    background-color: #555; /* Ändern Sie die Hintergrundfarbe nach Bedarf */
+    color: #fff; /* Ändern Sie die Textfarbe nach Bedarf */
+}
