@@ -37,6 +37,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
+    function createCornichon() {
+        const target = document.createElement('target');
+        card.classList.add('target');
+        
+    }
+    
+
     function startGame() {
         if (!isGameRunning) {
             score = 0;
@@ -66,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             score += points;
             updateScore();
-            updateTable(attemptNumber, reactionTime); 
+            updateTable(attemptNumber, reactionTime);
             attemptNumber++; // Increment the attempt number
             rotateAndMoveTarget();
         }
@@ -102,6 +109,10 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateTimer() {
         time--;
         timerElement.textContent = 'Time: ' + time;
+
+        if (time == 55){
+            createCornichon();
+    }
 
         if (time <= 0) {
             endGame();
