@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     startButton.addEventListener('click', startGame);
 
     function createCornichon() {
-        const target = document.createElement('target');
-        card.classList.add('target');
+        const newTarget = document.createElement('div');
+        newTarget.classList.add('target');
         
     }
     
@@ -113,13 +113,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateTable(attempt, reaction) {
 
-        // Get the table body
+        // Erstellt die Tabelle
         const tableBody = document.getElementById('table-body');
 
-        // Create a new row
+        // Erstellt eine neue Reihe
         const newRow = document.createElement('tr');
 
-        // Create and set values for the cells
+        // Erstellt und legt den Wert fest
         const attemptCell = document.createElement('td');
         attemptCell.textContent = attempt;
         newRow.appendChild(attemptCell);
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         reactionCell.textContent = reaction.toFixed(2); // Display reaction time with two decimal places
         newRow.appendChild(reactionCell);
 
-        // Append the new row to the table body
+        // Hängt eine neue Zeile an die Tabelle
         tableBody.appendChild(newRow);
     }
 
