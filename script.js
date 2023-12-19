@@ -35,10 +35,28 @@ document.addEventListener('DOMContentLoaded', function () {
         target.style.top = '0';
     }
 
-    function createCornichon() {
-        // Hier solltest du den Code für das Erstellen eines Cornichon einfügen
-        // (der vorhandene Code enthält einen Fehler)
-    }
+    /*function createCornichon() {
+        console.log("createCornichon");
+        const gameContainer = document.querySelector('.game-container');
+        const newTarget = document.createElement('div');
+        newTarget.classList.add('target');
+    
+        gameContainer.appendChild(newTarget);
+        
+        newTarget.addEventListener('click', hitTarget);
+    
+        const maxX = document.querySelector('.game-container').offsetWidth - newTarget.offsetWidth;
+        const maxY = document.querySelector('.game-container').offsetHeight - newTarget.offsetHeight;
+    
+        const randomX = Math.floor(Math.random() * maxX);
+        const randomY = Math.floor(Math.random() * maxY);
+        
+        newTarget.style.left = randomX + 'px';
+        newTarget.style.top = randomY + 'px';
+    /*
+        document.querySelector('.game-container').appendChild(newTarget);
+    
+    }*/
 
     function startGame() {
         if (!isGameRunning) {
@@ -105,9 +123,9 @@ document.addEventListener('DOMContentLoaded', function () {
         time--;
         timerElement.textContent = 'Time: ' + time;
 
-        if (time == 55) {
+       /* if (time == 55) {
             createCornichon();
-        }
+        }*/
 
         if (time <= 0) {
             endGame();
