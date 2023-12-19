@@ -155,6 +155,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateTable(attempt, reaction) {
-        // Dein bestehender Code für das Aktualisieren der Tabelle bleibt unverändert
+        // Erstellt die Tabelle
+    const tableBody = document.getElementById('table-body');
+
+    // Erstellt eine neue Reihe
+    const newRow = document.createElement('tr');
+
+    // Erstellt und legt den Wert fest
+    const attemptCell = document.createElement('td');
+    attemptCell.textContent = attempt;
+    newRow.appendChild(attemptCell);
+
+    const reactionCell = document.createElement('td');
+    reactionCell.textContent = reaction.toFixed(2); // Display reaction time with two decimal places
+    newRow.appendChild(reactionCell);
+
+    // Hängt eine neue Zeile an die Tabelle
+    tableBody.appendChild(newRow);
     }
 });
