@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function () {
     async function fetchMotivationalQuote() {
         try {
             const response = await fetch('https://api.quotable.io/random');
-            const data = await response.json();
+            const data = await response.json(); //JavaScriptObjectNotation, ein Datenformat für den Austausch von struktuellen Daten
 
             if (response.ok) {
                 showMotivationalQuote(data.content, data.author);
