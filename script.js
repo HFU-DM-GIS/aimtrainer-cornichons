@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let time = 60;
     let isGameRunning = false;
     let countdownInterval;
-    let targetClickTime;
+    let targetClickTime; // targetCreationTime wäre treffender
 
     target.addEventListener('click', hitTarget);
     startButton.addEventListener('click', startGame);
@@ -40,7 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const gameContainer = document.querySelector('.game-container');
         const newTarget = document.createElement('div');
         newTarget.classList.add('target');
-    
+        // gebt dem neuen Target eine random id, und dann kann das Element wieder gelöscht werden (gameContainer.removeChild)
+
         gameContainer.appendChild(newTarget);
         
         newTarget.addEventListener('click', hitTarget);
@@ -70,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function hitTarget() {
+    function hitTarget(event) { // mit dieser Variable könnt ihr ermitteln worauf geklickt wurde und damit dann zwischen mehreren Cornichons unterscheiden
         if (isGameRunning) {
             const clickTime = new Date().getTime();
             const reactionTime = (clickTime - targetClickTime) / 1000; // in Sekunden
@@ -84,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
             } else if (reactionTime >= 1 && reactionTime < 1.5) {
                 points = 25;
             }
-
+            console.log(event.target); // gibt das HTML Element an, auf welches geklickt wurde
             score += points;
             updateScore();
             updateTable(attemptNumber, reactionTime);
@@ -137,6 +138,7 @@ document.addEventListener('DOMContentLoaded', function () {
         isGameRunning = false;
         startButton.disabled = false;
 
+        // Vermeidet deutsche Kommentare im Code und die Kommentare sollten die Intention des Codes beschreiben und keine Aufforderungen
         // Hier solltest du den Code für das Überprüfen des Scores und Anzeigen einer Meldung einfügen
         if (score < 500) {
             alert('Only ' + score + '!? You SUCK!');
