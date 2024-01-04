@@ -10,3 +10,13 @@ This is an implementation of an aim trainer for FPS games. The initial source co
 - Various shapes for the fields
 - Timer counts down
 - Gameplay with more and more complex levels
+
+## Code review by UH 2024-01-04
+- The movement of the cornichons is nice and it is kind of fun to play.
+- The table with the times grows so large it is no displayed any more.
+  - Just count the points and store them with a user name in the localStorage.
+  - Display a leaderboard
+- Remove all German comments and describe your intention
+- Use proper names for all variables, functions and folders (e.g. PNG)
+- Get the createCornichon() function running with the given hints. Try first to write the method in a way that it is called once when the game starts. Then think about when multiple cornichons should be created. Work with appendChild and removeChild.
+- Let the user adjust the difficulty or change the difficulty after completing a level. 
