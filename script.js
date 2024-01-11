@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let time = 60;
     let isGameRunning = false;
     let countdownInterval;
-    let targetClickTime;
+    let startReactionTime;
 
     target.addEventListener('click', hitTarget);
     startButton.addEventListener('click', startGame);
@@ -25,38 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
         updateScore();
         timerElement.textContent = 'Time: ' + time;
 
-        // Lösche den Inhalt der Tabelle
+        // Clear the table content
         const tableBody = document.getElementById('table-body');
         tableBody.innerHTML = '';
 
-        // Setze den Ziel-Div zurück
+        // Reset the target div
         target.style.transform = 'rotate(0deg) scale(1)';
         target.style.left = '0';
         target.style.top = '0';
     }
-
-    /*function createCornichon() {
-        console.log("createCornichon");
-        const gameContainer = document.querySelector('.game-container');
-        const newTarget = document.createElement('div');
-        newTarget.classList.add('target');
-    
-        gameContainer.appendChild(newTarget);
-        
-        newTarget.addEventListener('click', hitTarget);
-    
-        const maxX = document.querySelector('.game-container').offsetWidth - newTarget.offsetWidth;
-        const maxY = document.querySelector('.game-container').offsetHeight - newTarget.offsetHeight;
-    
-        const randomX = Math.floor(Math.random() * maxX);
-        const randomY = Math.floor(Math.random() * maxY);
-        
-        newTarget.style.left = randomX + 'px';
-        newTarget.style.top = randomY + 'px';
-    /*
-        document.querySelector('.game-container').appendChild(newTarget);
-    
-    }*/
 
     function startGame() {
         if (!isGameRunning) {
@@ -72,8 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function hitTarget() {
         if (isGameRunning) {
-            const clickTime = new Date().getTime();
-            const reactionTime = (clickTime - targetClickTime) / 1000; // in Sekunden
+            const endReactionTime = new Date().getTime();
+            const reactionTime = (endReactionTime - startReactionTime) / 1000; // subtracts the saved the times to get the time inbetweem hits 
 
             let points = 0;
 
@@ -88,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             score += points;
             updateScore();
             updateTable(attemptNumber, reactionTime);
-            attemptNumber++; // Increment the attempt number
+            attemptNumber++; // Increase the attempt number
             rotateAndMoveTarget();
         }
     }
@@ -98,8 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function rotateAndMoveTarget() {
-        const rotation = Math.floor(Math.random() * 360); // Zufällige Drehung zwischen 0 und 360 Grad
-        const size = Math.floor(Math.random() * 150) + 100; // Zufällige Größe zwischen 100% und 250%
+        const rotation = Math.floor(Math.random() * 360); // Random rotation between 0 and 360 degrees
+        const size = Math.floor(Math.random() * 150) + 100; // Random size between 100% and 250%
 
         target.style.transform = 'rotate(' + rotation + 'deg) scale(' + size / 100 + ')';
 
@@ -116,14 +93,14 @@ document.addEventListener('DOMContentLoaded', function () {
         target.style.left = randomX + 'px';
         target.style.top = randomY + 'px';
 
-        targetClickTime = new Date().getTime(); // Setze die Zeit, wenn das Ziel bewegt wurde
+        startReactionTime = new Date().getTime(); // Set the time when the target was moved
     }
 
     function updateTimer() {
         time--;
         timerElement.textContent = 'Time: ' + time;
 
-       /* if (time == 55) {
+        /*if (time == 55) {
             createCornichon();
         }*/
 
@@ -137,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
         isGameRunning = false;
         startButton.disabled = false;
 
-        // Hier solltest du den Code für das Überprüfen des Scores und Anzeigen einer Meldung einfügen
         if (score < 500) {
             alert('Only ' + score + '!? You SUCK!');
         } else if (score < 1000) {
@@ -148,14 +124,13 @@ document.addEventListener('DOMContentLoaded', function () {
             alert(score + '! OMG MOM GET THE CAMERA');
         }
 
-        // Füge hier den Code für das Abrufen und Anzeigen des motivierenden Zitats hinzu
         fetchMotivationalQuote();
     }
 
     async function fetchMotivationalQuote() {
         try {
             const response = await fetch('https://api.quotable.io/random');
-            const data = await response.json(); //JavaScriptObjectNotation, ein Datenformat für den Austausch von struktuellen Daten
+            const data = await response.json();
 
             if (response.ok) {
                 showMotivationalQuote(data.content, data.author);
@@ -173,22 +148,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateTable(attempt, reaction) {
-        // Erstellt die Tabelle
-    const tableBody = document.getElementById('table-body');
+        // Get the table
+        const tableBody = document.getElementById('table-body');
 
-    // Erstellt eine neue Reihe
-    const newRow = document.createElement('tr');
+        // Create a new row
+        const newRow = document.createElement('tr');
 
-    // Erstellt und legt den Wert fest
-    const attemptCell = document.createElement('td');
-    attemptCell.textContent = attempt;
-    newRow.appendChild(attemptCell);
+        // Create and set the value
+        const attemptCell = document.createElement('td');
+        attemptCell.textContent = attempt;
+        newRow.appendChild(attemptCell);
 
-    const reactionCell = document.createElement('td');
-    reactionCell.textContent = reaction.toFixed(2); // Display reaction time with two decimal places
-    newRow.appendChild(reactionCell);
+        const reactionCell = document.createElement('td');
+        reactionCell.textContent = reaction.toFixed(2); // Display reaction time with two decimal places
+        newRow.appendChild(reactionCell);
 
-    // Hängt eine neue Zeile an die Tabelle
-    tableBody.appendChild(newRow);
+        // Append a new row to the table
+        tableBody.appendChild(newRow);
     }
 });
