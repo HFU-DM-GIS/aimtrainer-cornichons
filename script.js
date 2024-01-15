@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const timerElement = document.getElementById('timer');
     const startButton = document.getElementById('start-button');
     const resetButton = document.getElementById('reset-button');
+    const difficultySelect = document.getElementById('difficulty');
+    const applyDifficultyButton = document.getElementById('apply-difficulty');
+
     let attemptNumber = 1;
     let score = 0;
     let time = 60;
@@ -14,7 +17,8 @@ document.addEventListener('DOMContentLoaded', function () {
     target.addEventListener('click', hitTarget);
     startButton.addEventListener('click', startGame);
     resetButton.addEventListener('click', resetGame);
-
+    applyDifficultyButton.addEventListener('click', applyDifficulty);
+    
     function resetGame() {
         clearInterval(countdownInterval);
         isGameRunning = false;
@@ -166,4 +170,31 @@ document.addEventListener('DOMContentLoaded', function () {
         // Append a new row to the table
         tableBody.appendChild(newRow);
     }
-});
+
+    function applyDifficulty() {
+
+        if (!isGameRunning) {
+        const selectedDifficulty = easy;
+
+        // Adjust game parameters based on difficulty
+        switch (selectedDifficulty) {
+            case 'easy':
+                time = 60;
+                break;
+
+            case 'medium':
+                time = 50;
+                break;
+
+            case 'hard':
+                time = 40;
+                break;
+        }
+        alert(`Difficulty set to ${selectedDifficulty}`);
+    } else {
+        alert('Cannot change difficulty while the game is running. Please stop the game first.');
+    }
+    }
+}
+
+);
