@@ -19,11 +19,6 @@ document.addEventListener('DOMContentLoaded', function () {
     startButton.addEventListener('click', startGame);
     resetButton.addEventListener('click', resetGame);
     applyDifficultyButton.addEventListener('click', applyDifficulty);
-
-    target.addEventListener('click', hitTarget);
-    startButton.addEventListener('click', startGame);
-    resetButton.addEventListener('click', resetGame);
-    applyDifficultyButton.addEventListener('click', applyDifficulty);
     
     function resetGame() {
         clearInterval(countdownInterval);
@@ -96,7 +91,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function rotateAndMoveTarget() {
         const rotation = Math.floor(Math.random() * 360); // Random rotation between 0 and 360 degrees
-        const size = Math.floor(Math.random() * 150) + 100; // Random size between 100% and 250%
+        let size;
+
+        if (difficultySelect.value === 'medium') {
+            size = Math.floor(Math.random() * 100) + 50;
+        } else if(difficultySelect.value === 'hard') {
+            size = Math.floor(Math.random() * 50) + 50;
+        } else {
+            size = Math.floor(Math.random() * 150) + 100;
+        }
 
         target.style.transform = 'rotate(' + rotation + 'deg) scale(' + size / 100 + ')';
 
@@ -120,9 +123,6 @@ document.addEventListener('DOMContentLoaded', function () {
         time--;
         timerElement.textContent = 'Time: ' + time;
 
-        /*if (time == 55) {
-            createCornichon();
-        }*/
 
         if (time <= 0) {
             endGame();
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function applyDifficulty() {
 
         if (!isGameRunning) {
-        const selectedDifficulty = easy;
+        const selectedDifficulty = difficultySelect.value;
 
         // Adjust game parameters based on difficulty
         switch (selectedDifficulty) {
