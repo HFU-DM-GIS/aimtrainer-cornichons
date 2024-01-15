@@ -13,6 +13,12 @@ document.addEventListener('DOMContentLoaded', function () {
     let isGameRunning = false;
     let countdownInterval;
     let startReactionTime;
+    let highScore = localStorage.getItem('highScore') || 0; // Remove the extra declaration
+
+    target.addEventListener('click', hitTarget);
+    startButton.addEventListener('click', startGame);
+    resetButton.addEventListener('click', resetGame);
+    applyDifficultyButton.addEventListener('click', applyDifficulty);
 
     target.addEventListener('click', hitTarget);
     startButton.addEventListener('click', startGame);
@@ -76,6 +82,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function updateScore() {
         scoreElement.textContent = 'Score: ' + score;
+        updateHighScore(); // Call the function to update and display the high score
+    }
+
+    function updateHighScore() {
+        const highScoreElement = document.getElementById('high-score');
+        if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('highScore', highScore); // Update localStorage with the new high score
+        }
+        highScoreElement.textContent = 'High Score: ' + highScore;
     }
 
     function rotateAndMoveTarget() {
