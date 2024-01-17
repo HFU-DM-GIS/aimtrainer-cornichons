@@ -4,47 +4,31 @@ document.addEventListener('DOMContentLoaded', function () {
     const timerElement = document.getElementById('timer');
     const startButton = document.getElementById('start-button');
     const resetButton = document.getElementById('reset-button');
+    const tableBody = document.getElementById('table-body');
     const difficultySelect = document.getElementById('difficulty');
     const applyDifficultyButton = document.getElementById('apply-difficulty');
+    const highScoreElement = document.getElementById('high-score');
 
     let attemptNumber = 1;
     let score = 0;
     let time = 60;
+    let points = 0;
+    let size;
     let isGameRunning = false;
     let countdownInterval;
     let startReactionTime;
-    let highScore = localStorage.getItem('highScore') || 0; // Remove the extra declaration
+    let highScore = localStorage.getItem('highScore') || 0; // Removes the extra declaration
 
     target.addEventListener('click', hitTarget);
     startButton.addEventListener('click', startGame);
     resetButton.addEventListener('click', resetGame);
     applyDifficultyButton.addEventListener('click', applyDifficulty);
-    
-    function resetGame() {
-        clearInterval(countdownInterval);
-        isGameRunning = false;
-        startButton.disabled = false;
-        score = 0;
-        time = 60;
-        attemptNumber = 1;
-        updateScore();
-        timerElement.textContent = 'Time: ' + time;
 
-        // Clear the table content
-        const tableBody = document.getElementById('table-body');
-        tableBody.innerHTML = '';
-
-        // Reset the target div
-        target.style.transform = 'rotate(0deg) scale(1)';
-        target.style.left = '0';
-        target.style.top = '0';
-    }
-
-    function startGame() {
+     function startGame() {
         if (!isGameRunning) {
             score = 0;
             time = 60;
-            updateScore();
+            updateScore();  
             startButton.disabled = true;
             isGameRunning = true;
             countdownInterval = setInterval(updateTimer, 1000);
@@ -52,12 +36,28 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    function resetGame() {
+        clearInterval(countdownInterval);
+        isGameRunning = false;
+        startButton.disabled = false;
+        score = 0;
+        time = 60;
+        attemptNumber = 1;
+        timerElement.textContent = 'Time: ' + time;
+
+        // Clears the table content
+        tableBody.innerHTML = '';
+
+        // Sets the target to its original position
+        target.style.transform = 'rotate(0deg) scale(1)';
+        target.style.left = '0';
+        target.style.top = '0';
+    }
+
     function hitTarget() {
         if (isGameRunning) {
             const endReactionTime = new Date().getTime();
             const reactionTime = (endReactionTime - startReactionTime) / 1000; // subtracts the saved the times to get the time inbetweem hits 
-
-            let points = 0;
 
             if (reactionTime < 0.5) {
                 points = 100;
@@ -70,32 +70,31 @@ document.addEventListener('DOMContentLoaded', function () {
             score += points;
             updateScore();
             updateTable(attemptNumber, reactionTime);
-            attemptNumber++; // Increase the attempt number
+            attemptNumber++; 
             rotateAndMoveTarget();
         }
     }
 
     function updateScore() {
         scoreElement.textContent = 'Score: ' + score;
-        updateHighScore(); // Call the function to update and display the high score
+        updateHighScore();  // Calls the function to update and display the high score
     }
 
     function updateHighScore() {
-        const highScoreElement = document.getElementById('high-score');
+        
         if (score > highScore) {
             highScore = score;
-            localStorage.setItem('highScore', highScore); // Update localStorage with the new high score
+            localStorage.setItem('highScore', highScore); // Updates localStorage with the new high score
         }
         highScoreElement.textContent = 'High Score: ' + highScore;
     }
 
     function rotateAndMoveTarget() {
         const rotation = Math.floor(Math.random() * 360); // Random rotation between 0 and 360 degrees
-        let size;
-
-        if (difficultySelect.value === 'medium') {
+        
+        if (difficultySelect.value == 'medium') {
             size = Math.floor(Math.random() * 100) + 50;
-        } else if(difficultySelect.value === 'hard') {
+        } else if(difficultySelect.value == 'hard') {
             size = Math.floor(Math.random() * 50) + 50;
         } else {
             size = Math.floor(Math.random() * 150) + 100;
@@ -103,10 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         target.style.transform = 'rotate(' + rotation + 'deg) scale(' + size / 100 + ')';
 
-        moveTarget();
-    }
-
-    function moveTarget() {
         const maxX = document.querySelector('.game-container').offsetWidth - target.offsetWidth;
         const maxY = document.querySelector('.game-container').offsetHeight - target.offsetHeight;
 
@@ -116,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
         target.style.left = randomX + 'px';
         target.style.top = randomY + 'px';
 
-        startReactionTime = new Date().getTime(); // Set the time when the target was moved
+        startReactionTime = new Date().getTime(); // Sets the time when the target was moved
     }
 
     function updateTimer() {
@@ -137,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (score < 500) {
             alert('Only ' + score + '!? You SUCK!');
         } else if (score < 1000) {
-            alert(score + '? I mean it`s alright');
+            alert(score + '? I mean it`s alright like');
         } else if (score < 2000) {
             alert('You`ve done well with ' + score + ' points');
         } else if (score > 4000) {
@@ -168,13 +163,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateTable(attempt, reaction) {
-        // Get the table
+        // Gets the table
         const tableBody = document.getElementById('table-body');
 
-        // Create a new row
+        // Creates a new row
         const newRow = document.createElement('tr');
 
-        // Create and set the value
+        // Creates and sets the value
         const attemptCell = document.createElement('td');
         attemptCell.textContent = attempt;
         newRow.appendChild(attemptCell);
@@ -183,7 +178,6 @@ document.addEventListener('DOMContentLoaded', function () {
         reactionCell.textContent = reaction.toFixed(2); // Display reaction time with two decimal places
         newRow.appendChild(reactionCell);
 
-        // Append a new row to the table
         tableBody.appendChild(newRow);
     }
 
@@ -192,18 +186,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isGameRunning) {
         const selectedDifficulty = difficultySelect.value;
 
-        // Adjust game parameters based on difficulty
+        // Can switch between 3 difficulties
         switch (selectedDifficulty) {
             case 'easy':
-                time = 60;
                 break;
 
             case 'medium':
-                time = 50;
                 break;
 
             case 'hard':
-                time = 40;
                 break;
         }
         alert(`Difficulty set to ${selectedDifficulty}`);

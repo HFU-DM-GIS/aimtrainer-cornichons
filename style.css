@@ -54,7 +54,13 @@ font-size: 24px;
 font-weight: bold;
 }
 
-
+.high-score {
+    position: absolute;
+    top: 20px;
+    right: 40%;
+    font-size: 24px;
+    font-weight: bold;
+}
 
 .start-button, .reset-button, #apply-difficulty, #difficulty {
 font-family: inherit;
@@ -75,7 +81,7 @@ color: #fff;
 }
 
 .reset-button {
-left: calc(50% + 100px); /* 100px Abstand zum Start-Button */
+left: calc(50% + 100px); 
 background-color: #555; 
 color: #fff; 
 }
@@ -88,7 +94,7 @@ color: #fff;
 
 
 #difficulty {
-    left: calc(15%); /* 100px Abstand zum Start-Button */
+    left: 15%; 
     background-color: #555; 
     color: #fff; 
 }
