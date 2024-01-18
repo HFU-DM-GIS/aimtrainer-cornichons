@@ -17,18 +17,18 @@ document.addEventListener('DOMContentLoaded', function () {
     let isGameRunning = false;
     let countdownInterval;
     let startReactionTime;
-    let highScore = localStorage.getItem('highScore') || 0; // Removes the extra declaration
+    let highScore = localStorage.getItem('highScore') || 0; // Replaces the "0" when once a highscore has been set
 
     target.addEventListener('click', hitTarget);
     startButton.addEventListener('click', startGame);
     resetButton.addEventListener('click', resetGame);
     applyDifficultyButton.addEventListener('click', applyDifficulty);
 
-     function startGame() {
+    function startGame() {
         if (!isGameRunning) {
             score = 0;
             time = 60;
-            updateScore();  
+            updateScore();
             startButton.disabled = true;
             isGameRunning = true;
             countdownInterval = setInterval(updateTimer, 1000);
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             score += points;
             updateScore();
             updateTable(attemptNumber, reactionTime);
-            attemptNumber++; 
+            attemptNumber++;
             rotateAndMoveTarget();
         }
     }
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateHighScore() {
-        
+
         if (score > highScore) {
             highScore = score;
             localStorage.setItem('highScore', highScore); // Updates localStorage with the new high score
@@ -91,10 +91,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function rotateAndMoveTarget() {
         const rotation = Math.floor(Math.random() * 360); // Random rotation between 0 and 360 degrees
-        
+
         if (difficultySelect.value == 'medium') {
             size = Math.floor(Math.random() * 100) + 50;
-        } else if(difficultySelect.value == 'hard') {
+        } else if (difficultySelect.value == 'hard') {
             size = Math.floor(Math.random() * 50) + 50;
         } else {
             size = Math.floor(Math.random() * 150) + 100;
@@ -184,24 +184,23 @@ document.addEventListener('DOMContentLoaded', function () {
     function applyDifficulty() {
 
         if (!isGameRunning) {
-        const selectedDifficulty = difficultySelect.value;
+            const selectedDifficulty = difficultySelect.value;
 
-        // Can switch between 3 difficulties
-        switch (selectedDifficulty) {
-            case 'easy':
-                break;
+            // Can switch between 3 difficulties
+            switch (selectedDifficulty) {
+                case 'easy':
+                    break;
 
-            case 'medium':
-                break;
+                case 'medium':
+                    break;
 
-            case 'hard':
-                break;
+                case 'hard':
+                    break;
+            }
+            alert(`Difficulty set to ${selectedDifficulty}`);
+        } else {
+            alert('Cannot change difficulty while the game is running. Please stop the game first.');
         }
-        alert(`Difficulty set to ${selectedDifficulty}`);
-    } else {
-        alert('Cannot change difficulty while the game is running. Please stop the game first.');
-    }
     }
 }
-
-);
+)
