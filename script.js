@@ -186,17 +186,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isGameRunning) {
             const selectedDifficulty = difficultySelect.value;
 
-            // Can switch between 3 difficulties
-            switch (selectedDifficulty) {
-                case 'easy':
-                    break;
-
-                case 'medium':
-                    break;
-
-                case 'hard':
-                    break;
-            }
             alert(`Difficulty set to ${selectedDifficulty}`);
         } else {
             alert('Cannot change difficulty while the game is running. Please stop the game first.');
